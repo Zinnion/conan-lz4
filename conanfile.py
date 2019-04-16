@@ -11,7 +11,7 @@ class LZ4Conan(ConanFile):
     version = "1.8.3"
     description = "Extremely Fast Compression algorithm"
     license = ("BSD-2-Clause", "BSD-3-Clause")
-    url = "https://github.com/bincrafters/conan-lz4"
+    url = "https://github.com/zinnion/conan-lz4"
     homepage = "https://github.com/lz4/lz4"
     author = "Zinnion <mauro@zinnion.com>"
     topics = ("conan", "lz4", "compression")
@@ -23,18 +23,6 @@ class LZ4Conan(ConanFile):
 
     def configure(self):
         del self.settings.compiler.libcxx
-
-    def config_options(self):
-        if self.settings.os == "Windows":
-            del self.options.fPIC
-
-    @property
-    def _is_mingw_windows(self):
-        return self.settings.os == "Windows" and self.settings.compiler == "gcc" and os.name == "nt"
-
-    def build_requirements(self):
-        if self._is_mingw_windows:
-            self.build_requires("msys2_installer/latest@bincrafters/stable")
 
     def source(self):
         sha256 = "33af5936ac06536805f9745e0b6d61da606a1f8b4cc5c04dd3cbaca3b9b4fc43"
